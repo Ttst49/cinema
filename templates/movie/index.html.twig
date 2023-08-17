@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movies{% endblock %}
+
+{% block body %}
+{% for movie in movies %}
+    {{ movie.title }}
+    {{ movie.id }}
+    {{ movie.synopsis }}
+    {% for category in movie.getCategory %}
+        {{ category.name }}
+    {% endfor%}
+    {{ movie.releaseDate }}
+{% endfor %}
+{% endblock %}

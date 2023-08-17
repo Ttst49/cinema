@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MovieCategory{% endblock %}
+
+{% block body %}
+    <h1>Create new MovieCategory</h1>
+
+    {{ include('movie_category/_form.html.twig') }}
+
+    <a href="{{ path('app_movie_category_index') }}">back to list</a>
+{% endblock %}
