@@ -41,6 +41,9 @@ class Movie
     #[ORM\JoinColumn(nullable: false)]
     private ?Director $director = null;
 
+    #[ORM\Column]
+    private ?bool $isNew = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -168,6 +171,18 @@ class Movie
     public function setDirector(?Director $director): static
     {
         $this->director = $director;
+
+        return $this;
+    }
+
+    public function isIsNew(): ?bool
+    {
+        return $this->isNew;
+    }
+
+    public function setIsNew(bool $isNew): static
+    {
+        $this->isNew = $isNew;
 
         return $this;
     }

@@ -14,7 +14,9 @@
     {{ form_row(movieForm.releaseDate) }}
     {{ form_row(movieForm.duration) }}
     {{ form_row(movieForm.director) }}
+    <span>Missing a director?? <a href="{{ path('app_director_new') }}" class="btn btn-primary">Add one</a></span><br>
 
+    {{ form_row(movieForm.isNew) }}
     <button type="submit" class="btn btn-success">Valider</button>
     {{ form_end(movieForm) }}
 {% endblock %}

@@ -31,6 +31,8 @@ class MovieController extends AbstractController
         if ($movieForm->isSubmitted() && $movieForm->isValid()){
             $manager->persist($movie);
             $manager->flush();
+
+            return $this->redirectToRoute("app_movie");
         }
         return $this->renderForm("movie/new.html.twig",[
             "movieForm"=>$movieForm

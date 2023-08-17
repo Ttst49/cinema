@@ -4,12 +4,18 @@
 
 {% block body %}
 {% for movie in movies %}
-    {{ movie.title }}
-    {{ movie.id }}
-    {{ movie.synopsis }}
-    {% for category in movie.getCategory %}
-        {{ category.name }}
-    {% endfor%}
-    {{ movie.releaseDate }}
+    <div class="film" style="display: flex;align-items:center;justify-content: center;margin: 50px">
+        {% if movie.isNew %}
+            <span style="border-radius: 30px;background-color: gold;padding: 10px">nouveau</span>
+        {% endif %}
+        {{ movie.title }}<br>
+        {{ movie.id }}<br>
+        {{ movie.synopsis }}<br>
+        {% for category in movie.getCategory %}
+            {{ category.name }}<br>
+        {% endfor%}
+        {{ movie.releaseDate | date("d/m/y") }}<br>
+    </div>
+    <br>
 {% endfor %}
 {% endblock %}

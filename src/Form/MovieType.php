@@ -33,6 +33,7 @@ class MovieType extends AbstractType
                 "class"=>Director::class,
                 "choice_label"=>"name",
             ])
+            ->add("isNew")
         ;
     }
 
