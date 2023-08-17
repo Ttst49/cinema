@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create a new movie{% endblock %}
+
+{% block javascripts %}
+    <script src="../../src/javascript/main.js"></script>
+{% endblock %}
+
+{% block body %}
+    {{ form_start(movieForm) }}
+    {{ form_row(movieForm.title) }}
+    {{ form_row(movieForm.synopsis) }}
+    {{ form_row(movieForm.rating) }}
+    {{ form_row(movieForm.releaseDate) }}
+    {{ form_row(movieForm.duration) }}
+    {{ form_row(movieForm.director) }}
+
+    <button type="submit" class="btn btn-success">Valider</button>
+    {{ form_end(movieForm) }}
+{% endblock %}

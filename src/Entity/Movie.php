@@ -25,7 +25,7 @@ class Movie
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
 
-    #[ORM\ManyToMany(targetEntity: Actor::class, inversedBy: 'movies')]
+    #[ORM\ManyToMany(targetEntity: Actor::class, inversedBy: 'movies',cascade: ["persist"])]
     private Collection $casting;
 
     #[ORM\Column(nullable: true)]
@@ -36,6 +36,10 @@ class Movie
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $title = null;
+
+    #[ORM\ManyToOne(inversedBy: 'movies')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Director $director = null;
 
     public function __construct()
     {
@@ -155,4 +159,17 @@ class Movie
 
         return $this;
     }
+
+    public function getDirector(): ?Director
+    {
+        return $this->director;
+    }
+
+    public function setDirector(?Director $director): static
+    {
+        $this->director = $director;
+
+        return $this;
+    }
+
 }

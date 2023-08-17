@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DirectorRepository;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DirectorRepository::class)]
@@ -14,37 +15,60 @@ class Director
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $firstName = null;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $lastName = null;
+    #[ORM\OneToMany(mappedBy: 'director', targetEntity: Movie::class)]
+    private Collection $movies;
+
+    public function __construct()
+    {
+        $this->movies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getName(): ?string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
-    public function setFirstName(string $firstName): static
+    public function setName(string $name): static
     {
-        $this->firstName = $firstName;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getLastName(): ?string
+    /**
+     * @return Collection<int, Movie>
+     */
+    public function getMovies(): Collection
     {
-        return $this->lastName;
+        return $this->movies;
     }
 
-    public function setLastName(string $lastName): static
+    public function addMovie(Movie $movie): static
     {
-        $this->lastName = $lastName;
+        if (!$this->movies->contains($movie)) {
+            $this->movies->add($movie);
+            $movie->setDirector($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMovie(Movie $movie): static
+    {
+        if ($this->movies->removeElement($movie)) {
+            // set the owning side to null (unless already changed)
+            if ($movie->getDirector() === $this) {
+                $movie->setDirector(null);
+            }
+        }
 
         return $this;
     }
