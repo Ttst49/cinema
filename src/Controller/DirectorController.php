@@ -22,6 +22,7 @@ class DirectorController extends AbstractController
         ]);
     }
 
+    #[Route("/newFromMovie",name: "app_director_newFromMovie")]
     #[Route('/new', name: 'app_director_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -33,6 +34,9 @@ class DirectorController extends AbstractController
             $entityManager->persist($director);
             $entityManager->flush();
 
+            if ($request->get("_route")==="app_director_newFromMovie"){
+                return $this->redirectToRoute("app_movie_new");
+            }
             return $this->redirectToRoute('app_director_index', [], Response::HTTP_SEE_OTHER);
         }
 
