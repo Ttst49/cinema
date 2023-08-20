@@ -82,4 +82,13 @@ class DirectorController extends AbstractController
 
         return $this->redirectToRoute('app_director_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route("/profile/{id}")]
+    public function profiile(Director $director):Response{
+
+        return $this->render("director/profile.html.twig",[
+            "director"=>$director
+        ]);
+
+    }
 }

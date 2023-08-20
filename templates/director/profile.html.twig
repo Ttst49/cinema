@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ director.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ director.name }}</h1><br>
+    {% for movie in director.movies %}
+        {{ movie.title }}<br>
+        {{ movie.synopsis }}<br>
+        {{ movie.releaseDate | date("d/m/y") }}<br>
+        <br>
+    {% endfor %}
+{% endblock %}

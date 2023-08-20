@@ -4,15 +4,15 @@
 
 {% block body %}
 {% for movie in movies %}
-    <div class="film" style="display: flex;align-items:center;justify-content: center;margin: 50px">
+    <div class="film" style="display: flex;flex-direction: column;align-items:center;justify-content: center;margin: 50px">
         {% if movie.isNew %}
             <span style="border-radius: 30px;background-color: gold;padding: 10px">nouveau</span>
         {% endif %}
         {{ movie.title }}<br>
-        {{ movie.id }}<br>
-        {{ movie.synopsis }}<br>
+        <a href="{{ path('app_director_profiile',{id:movie.director.id}) }}">{{ movie.director.name }}</a>
+        {{ movie.synopsis }}
         {% for category in movie.getCategory %}
-            {{ category.name }}<br>
+            {{ category.name }}
         {% endfor%}
         {{ movie.releaseDate | date("d/m/y") }}<br>
     </div>
